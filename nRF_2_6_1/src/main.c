@@ -33,11 +33,10 @@ int main(void)
 
                 write_byte_i2c(&address_angle_11_8);
                 read_byte_i2c(&data_angle_11_8);
-                k_msleep(10);
-
+                k_msleep(5);
                 write_byte_i2c(&address_angle_7_0);
                 read_byte_i2c(&data_angle_7_0);
-                uint16_t angle = ((data_angle_7_0) | ((data_angle_11_8 & 0x0F) << 8));
+                uint16_t angle = ( ((data_angle_11_8 & 0x0F) << 8) | (data_angle_7_0));
                 LOG_INF("11_8: %u, 7_0: %u,  Angle: %u", data_angle_11_8, data_angle_7_0, angle);
 
                 k_msleep(100);
